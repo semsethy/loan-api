@@ -1,0 +1,14 @@
+{
+  "name": "loan-api",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [8000, 8080],
+  "postCreateCommand": "pip install -r requirements-dev.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "ms-azuretools.vscode-containers"]
+    }
+  }
+}

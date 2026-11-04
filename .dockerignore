@@ -1,0 +1,21 @@
+# Keep the build context small and free of secrets
+.git
+.gitignore
+.devcontainer
+.venv
+venv
+__pycache__
+*.pyc
+.pytest_cache
+model.joblib
+models
+.env
+.env.*
+*.pem
+*.key
+Dockerfile*
+compose*.yaml
+docker-compose*.yml
+CHECKLIST.md
+screenshots
+*.md

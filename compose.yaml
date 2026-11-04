@@ -1,0 +1,33 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: loan-api:1.0.0
+    ports:
+      - "8000:8000"
+    environment:
+      MODEL_PATH: /app/models/model.joblib
+      DATABASE_URL: postgresql://loan:loan_dev_password@db:5432/loans
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: loan
+      POSTGRES_PASSWORD: loan_dev_password   # development only - never use in production
+      POSTGRES_DB: loans
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U loan -d loans"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  db-data:
