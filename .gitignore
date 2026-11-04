@@ -6,3 +6,7 @@ model.joblib
 models/
 .env
 .env.*
+mlflow.db
+mlartifacts/
+.DS_Store
+mlruns/
